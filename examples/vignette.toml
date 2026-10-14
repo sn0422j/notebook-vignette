@@ -1,0 +1,18 @@
+[render]
+collapse_code = true
+toc_depth = 3
+mathjax = "auto"
+
+[theme]
+name = "default"
+syntax_style = "friendly"
+content_width = "1320px"
+font_size = "16px"
+line_height = 1.9
+font_family = "VignetteJP, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif"
+
+[theme.colors]
+accent = "#7452a3"
+ink = "#352649"
+background = "#f4f1f8"
+nav_active = "#eee7f5"

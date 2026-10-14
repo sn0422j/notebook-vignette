@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="notebook-vignette">
+<title>実験ノートを、読みやすいレポートに。</title><style>:root{--ink:#18334c;--muted:#586879;--accent:#087f8c;--line:#dfe6eb;--paper:#fff;--background:#f1f4f6;--text:#293c4d;--nav:#617486;--nav-active:#e4eef0;--note-text:#72808d;--shadow:#18334c06;--quote-bg:#edf7f5;--heading-bg:#eef3f5;--heading-text:#405c70;--table-border:#cbd7df;--cell-border:#e5ebef;--stripe:#fafcfd;--index-text:#8795a1;--inline-text:#126271;--inline-bg:#edf3f5;--code-bg:#f5f8fa;--code-border:#dce5eb;--fold-bg:#f7f9fb;--summary-text:#6d7f8f;--summary-bg:#edf2f5;--button-border:#c9d6df;--button-text:#586f82;--stream-border:#cbdce2;--stream-bg:#fafcfc;--warning-text:#926428;--warning-bg:#fff9f0;--result-bg:#f1f7f7;--formula-bg:#f8fafb;--formula-text:#284d67;--toolbar-text:#8294a2;--toolbar-border:#c5d7df;--toolbar-button:#49687b;--success:#169879;--footer-text:#738591;--error-text:#873d34;--error-bg:#fff6f2;--error-border:#ce8c7e;--state-text:#7b6574;--notice-bg:#fff9eb;--ansi-red:#b93838;--ansi-green:#25823e;--ansi-blue:#2c5cab;--ansi-yellow:#947013;--ansi-magenta:#8951a5;--font-family:VignetteJP, 'Noto Sans JP', 'Yu Gothic', Meiryo, sans-serif;--mono-font-family:'DejaVu Sans Mono', Consolas, monospace;--content-width:1240px;--font-size:15px;--line-height:1.94;color-scheme:light}@media print{:root{--ink:#18334c;--muted:#586879;--accent:#087f8c;--line:#dfe6eb;--paper:#fff;--background:#f1f4f6;--text:#293c4d;--nav:#617486;--nav-active:#e4eef0;--note-text:#72808d;--shadow:#18334c06;--quote-bg:#edf7f5;--heading-bg:#eef3f5;--heading-text:#405c70;--table-border:#cbd7df;--cell-border:#e5ebef;--stripe:#fafcfd;--index-text:#8795a1;--inline-text:#126271;--inline-bg:#edf3f5;--code-bg:#f5f8fa;--code-border:#dce5eb;--fold-bg:#f7f9fb;--summary-text:#6d7f8f;--summary-bg:#edf2f5;--button-border:#c9d6df;--button-text:#586f82;--stream-border:#cbdce2;--stream-bg:#fafcfc;--warning-text:#926428;--warning-bg:#fff9f0;--result-bg:#f1f7f7;--formula-bg:#f8fafb;--formula-text:#284d67;--toolbar-text:#8294a2;--toolbar-border:#c5d7df;--toolbar-button:#49687b;--success:#169879;--footer-text:#738591;--error-text:#873d34;--error-bg:#fff6f2;--error-border:#ce8c7e;--state-text:#7b6574;--notice-bg:#fff9eb;--ansi-red:#b93838;--ansi-green:#25823e;--ansi-blue:#2c5cab;--ansi-yellow:#947013;--ansi-magenta:#8951a5;color-scheme:light}}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:32px}
+body{margin:0;background:var(--background);color:var(--text);font-family:var(--font-family);font-size:var(--font-size);line-height:var(--line-height)}
+.masthead{max-width:var(--content-width);margin:38px auto 22px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;color:var(--muted);font-size:12px;letter-spacing:.08em}
+.masthead strong{color:var(--accent);font-size:13px}.masthead .date{letter-spacing:0}
+.layout{max-width:var(--content-width);margin:0 auto 65px;padding:0 22px;display:grid;grid-template-columns:226px minmax(0,1fr);gap:26px;align-items:start}
+aside{position:sticky;top:24px;max-height:calc(100vh - 48px);overflow:auto;font-size:12px;padding:7px 8px 24px 0}
+.nav-title{font-weight:bold;color:var(--muted);font-size:10px;letter-spacing:.18em;margin:0 0 13px 13px}
+nav a{display:block;text-decoration:none;color:var(--nav);padding:8px 12px;border-left:2px solid transparent;line-height:1.6;margin:0 0 3px}
+nav a:hover,nav a.active{background:var(--nav-active);border-color:var(--accent);color:var(--accent)}
+.nav-note{margin:28px 12px 0;padding-top:17px;border-top:1px solid var(--line);font-size:11px;color:var(--note-text);line-height:1.8}
+main{min-width:0;background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--accent);border-radius:3px;box-shadow:0 6px 22px var(--shadow);padding:44px 45px 30px}
+h1,h2,h3{color:var(--ink);line-height:1.5;letter-spacing:-.025em}h1{font-size:32px;margin:0 0 14px;font-weight:bold}h2{font-size:23px;margin:59px 0 20px;padding:0 0 13px;border-bottom:1px solid var(--line)}h3{font-size:18px;margin-top:30px}
+p{margin:14px 0 17px}a{color:var(--accent);text-underline-offset:3px}strong{font-weight:bold;color:var(--ink)}
+blockquote{margin:24px 0;padding:15px 21px;background:var(--quote-bg);border-left:3px solid var(--accent);border-radius:0 3px 3px 0;font-size:14px}blockquote p{margin:0}
+table{border-collapse:collapse;font-size:12.6px;line-height:1.7;min-width:100%;margin:16px 0 21px}th{background:var(--heading-bg);text-align:left;color:var(--heading-text);font-weight:bold;border-bottom:1px solid var(--table-border)}th,td{padding:10px 12px;vertical-align:top;border-bottom:1px solid var(--cell-border)}tbody tr:nth-child(even){background:var(--stripe)}
+.narrative>table{table-layout:auto}.rich{overflow-x:auto}.rich table{min-width:100%;margin:0;border-top:1px solid var(--line);font-size:11.5px;white-space:nowrap}.rich th,.rich td{padding:9px 10px}.rich .dataframe tbody th{background:transparent;font-weight:normal;color:var(--index-text)}
+code,pre{font-family:var(--mono-font-family)}code{font-size:.86em;color:var(--inline-text);background:var(--inline-bg);padding:.12em .35em;border-radius:3px}pre{font-size:11.5px;line-height:1.78;tab-size:4;margin:0;overflow-x:auto}
+.recipe-code{background:var(--code-bg);border:1px solid var(--line);border-radius:5px;padding:16px 18px;margin:17px 0 24px}.highlight{background:transparent!important}.highlight pre{white-space:pre;overflow-x:auto}
+.code-cell{margin:22px 0 26px;min-width:0}.code-cell details{position:relative;border:1px solid var(--code-border);border-radius:5px;overflow:hidden;background:var(--fold-bg)}
+.code-cell summary{padding:10px 17px;cursor:pointer;list-style:none;display:flex;gap:15px;justify-content:space-between;font-size:10px;color:var(--summary-text);background:var(--summary-bg);letter-spacing:.02em;user-select:none}
+.code-cell summary::-webkit-details-marker{display:none}.fold-hint{font-size:9px}.code-cell .highlight{padding:19px 18px 17px}.code-cell details[open] .fold-hint{padding-right:61px}
+.copy-button{position:absolute;right:13px;top:6px;border:1px solid var(--button-border);background:var(--paper);padding:4px 8px;border-radius:3px;font:10px VignetteJP,sans-serif;color:var(--button-text);cursor:pointer}
+.output{margin-top:13px}.output.stream{padding:0}.stream{padding:11px 14px;border-left:2px solid var(--stream-border);background:var(--stream-bg);font-size:11.7px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}
+.stderr{color:var(--warning-text);background:var(--warning-bg)}.figure{margin:16px 0 20px}.figure img{max-width:100%;width:100%;height:auto;display:block;border-radius:3px}.calculated{padding:5px 17px;background:var(--result-bg);border-radius:4px}
+.formula{font-size:17px;line-height:2.1;text-align:center;background:var(--formula-bg);border:1px solid var(--cell-border);padding:19px 14px;margin:23px 0;color:var(--formula-text);font-family:VignetteJP,serif;overflow-x:auto}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 25px;font-size:10px;color:var(--toolbar-text)}.toolbar button{background:var(--paper);border:1px solid var(--toolbar-border);border-radius:3px;color:var(--toolbar-button);padding:7px 10px;font:10px VignetteJP,sans-serif;cursor:pointer}.run-badge{display:inline-flex;align-items:center;gap:6px}.run-badge:before{content:'';width:6px;height:6px;border-radius:50%;background:var(--success)}
+footer{border-top:1px solid var(--line);padding-top:24px;margin-top:38px;color:var(--footer-text);font-size:11px}footer details{margin:15px 0}footer pre{font-size:10px;white-space:pre-wrap}.footer-top{display:flex;justify-content:space-between;gap:12px}
+ul,ol{padding-left:25px}li{margin-bottom:7px}ol a{overflow-wrap:anywhere}
+@media(max-width:960px){.layout{grid-template-columns:170px minmax(0,1fr);gap:16px;padding:0 16px}main{padding:32px 25px}h1{font-size:28px}aside{font-size:11px}}
+@media(max-width:700px){.masthead{margin-top:20px;padding:0 15px}.layout{display:block;padding:0 10px}aside{position:static;max-height:none;padding:0 5px 18px}nav{display:grid;grid-template-columns:1fr 1fr;gap:0 8px}nav a{font-size:10px;padding:5px 8px}.nav-note{display:none}.nav-title{margin-left:9px}main{padding:24px 17px}h1{font-size:25px}h2{font-size:20px;margin-top:43px}body{font-size:14px}.narrative{overflow-x:auto}table{font-size:11px}th,td{padding:8px}.toolbar{font-size:9px}pre{font-size:10.5px}.formula{font-size:14px;text-align:left}.footer-top{display:block}}
+@media print{body{background:var(--paper)}.masthead,aside,.toolbar,.copy-button,.fold-hint{display:none}.layout{display:block;max-width:none;padding:0;margin:0}main{border:0;box-shadow:none;padding:0}h2{break-after:avoid}figure,table,.formula{break-inside:avoid}.code-cell{break-inside:auto}a{color:inherit}body{font-size:10pt}pre{white-space:pre-wrap}.figure img{max-height:140mm;object-fit:contain}}
+
+/* nbconvertの基本構造をVignetteのレイアウトへ合わせる。 */
+body{font-family:var(--font-family)}
+.layout.no-toc{display:block;max-width:1020px}
+.prompt,.anchor-link{display:none}.cell,.inner_cell,.output_subarea{min-width:0}
+.text_cell_render{overflow-x:auto;overflow-wrap:anywhere}
+.code-cell details>.input{margin:0}.input_area{padding:0;background:transparent}
+.output_area{margin-top:13px}.output_subarea{overflow-x:auto}
+.output_text pre{padding:11px 14px;border-left:2px solid var(--stream-border);background:var(--stream-bg);white-space:pre-wrap;overflow-wrap:anywhere}
+.output_stderr pre,.output_error pre{color:var(--error-text);background:var(--error-bg);border-color:var(--error-border)}
+.output_html table{white-space:nowrap}.output_html pre{white-space:pre;overflow-x:auto}
+.output_subarea img{max-width:100%;height:auto;display:block}
+.output_subarea svg{max-width:100%;height:auto}.output_subarea iframe{max-width:100%}
+.output_subarea table{margin:0}.output_png,.output_svg,.output_jpeg{margin:15px 0}
+.text_cell_render img{max-width:100%;height:auto}
+.text_cell_render pre{padding:14px 16px;background:var(--code-bg);border:1px solid var(--line);border-radius:4px;margin:16px 0;overflow-x:auto}
+pre code{background:transparent;color:inherit;padding:0;font-size:inherit}
+.text_cell_render h1{font-size:27px;margin-top:42px}.document-title{overflow-wrap:anywhere}
+.intro-meta{font-size:11px;color:var(--muted);margin:0 0 25px;overflow-wrap:anywhere}
+.nav-depth-1{padding-left:22px}.nav-depth-2{padding-left:32px}
+.toolbar{flex-wrap:wrap}.cell-state{color:var(--state-text)}.output-note{padding:10px 14px;background:var(--notice-bg);font-size:12px}
+.output-note summary{cursor:pointer}.output-note pre{max-height:300px;overflow:auto;white-space:pre-wrap}
+.format-notes{font-size:11px;color:var(--muted);margin:14px 0 0;padding-left:18px}
+.math{overflow-x:auto}mjx-container{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.ansi-bold{font-weight:bold}.ansi-italic{font-style:italic}.ansi-underline{text-decoration:underline}
+.ansi-red-fg{color:var(--ansi-red)}.ansi-green-fg{color:var(--ansi-green)}.ansi-blue-fg{color:var(--ansi-blue)}
+.ansi-yellow-fg{color:var(--ansi-yellow)}.ansi-magenta-fg{color:var(--ansi-magenta)}.ansi-cyan-fg{color:var(--accent)}
+@media(max-width:700px){.masthead{gap:10px;align-items:flex-start}.toolbar{gap:12px}.copy-button{font-family:inherit}.code-cell summary{font-size:10px;flex-wrap:wrap}.code-cell .highlight{padding:14px 12px}.output_html table{font-size:11px}}
+@media print{.code-cell summary{display:none}.code-cell details>*{display:block!important}.output_subarea img{max-height:140mm;object-fit:contain}nav{display:none}}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{body{background:white;color:black}main{background:white;color:black}}
+pre { line-height: 125%; }
+td.linenos .normal { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #f0f0f0; }
+.highlight .c { color: #60A0B0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #F00 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666 } /* Operator */
+.highlight .ch { color: #60A0B0; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #60A0B0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .cpf { color: #60A0B0; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #60A0B0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60A0B0; background-color: #FFF0F0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #F00 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888 } /* Generic.Output */
+.highlight .gp { color: #C65D09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #04D } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40A070 } /* Literal.Number */
+.highlight .s { color: #4070A0 } /* Literal.String */
+.highlight .na { color: #4070A0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0E84B5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60ADD5 } /* Name.Constant */
+.highlight .nd { color: #555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #D55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287E } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0E84B5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #BB60D5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #BBB } /* Text.Whitespace */
+.highlight .mb { color: #40A070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40A070 } /* Literal.Number.Float */
+.highlight .mh { color: #40A070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40A070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40A070 } /* Literal.Number.Oct */
+.highlight .sa { color: #4070A0 } /* Literal.String.Affix */
+.highlight .sb { color: #4070A0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070A0 } /* Literal.String.Char */
+.highlight .dl { color: #4070A0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #4070A0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070A0 } /* Literal.String.Double */
+.highlight .se { color: #4070A0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070A0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70A0D0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #C65D09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070A0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #06287E } /* Name.Function.Magic */
+.highlight .vc { color: #BB60D5 } /* Name.Variable.Class */
+.highlight .vg { color: #BB60D5 } /* Name.Variable.Global */
+.highlight .vi { color: #BB60D5 } /* Name.Variable.Instance */
+.highlight .vm { color: #BB60D5 } /* Name.Variable.Magic */
+.highlight .il { color: #40A070 } /* Literal.Number.Integer.Long */@media print{pre { line-height: 125%; }
+td.linenos .normal { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #f0f0f0; }
+.highlight .c { color: #60A0B0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #F00 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666 } /* Operator */
+.highlight .ch { color: #60A0B0; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #60A0B0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .cpf { color: #60A0B0; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #60A0B0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60A0B0; background-color: #FFF0F0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.highlight .gr { color: #F00 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888 } /* Generic.Output */
+.highlight .gp { color: #C65D09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #04D } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40A070 } /* Literal.Number */
+.highlight .s { color: #4070A0 } /* Literal.String */
+.highlight .na { color: #4070A0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0E84B5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60ADD5 } /* Name.Constant */
+.highlight .nd { color: #555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #D55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287E } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0E84B5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #BB60D5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #BBB } /* Text.Whitespace */
+.highlight .mb { color: #40A070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40A070 } /* Literal.Number.Float */
+.highlight .mh { color: #40A070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40A070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40A070 } /* Literal.Number.Oct */
+.highlight .sa { color: #4070A0 } /* Literal.String.Affix */
+.highlight .sb { color: #4070A0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070A0 } /* Literal.String.Char */
+.highlight .dl { color: #4070A0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #4070A0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070A0 } /* Literal.String.Double */
+.highlight .se { color: #4070A0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070A0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70A0D0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #C65D09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070A0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #06287E } /* Name.Function.Magic */
+.highlight .vc { color: #BB60D5 } /* Name.Variable.Class */
+.highlight .vg { color: #BB60D5 } /* Name.Variable.Global */
+.highlight .vi { color: #BB60D5 } /* Name.Variable.Instance */
+.highlight .vm { color: #BB60D5 } /* Name.Variable.Magic */
+.highlight .il { color: #40A070 } /* Literal.Number.Integer.Long */}</style></head>
+<body><header class="masthead"><strong>NOTEBOOK / VIGNETTE</strong><span class="date">HTML生成 2026.10.12</span></header>
+<div class="layout"><aside aria-label="目次"><div class="nav-title">CONTENTS</div><nav><a class="nav-depth-0" href="#1.-%E6%9D%A1%E4%BB%B6%E3%81%A8%E6%96%B9%E6%B3%95">1. 条件と方法</a><a class="nav-depth-0" href="#2.-%E7%B5%90%E6%9E%9C%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96">2. 結果の可視化</a><a class="nav-depth-1" href="#%E6%99%82%E9%96%93%E3%81%A8%E5%8F%8D%E5%BF%9C%E7%8E%87">時間と反応率</a><a class="nav-depth-0" href="#3.-%E8%A1%A8%E7%A4%BA%E3%81%AE%E6%A4%9C%E8%A8%BC">3. 表示の検証</a><a class="nav-depth-1" href="#%E6%95%B0%E5%BC%8F">数式</a><a class="nav-depth-1" href="#%E6%9C%AA%E5%AE%9F%E8%A1%8C%E3%82%BB%E3%83%AB">未実行セル</a><a class="nav-depth-1" href="#%E4%BF%9D%E5%AD%98%E6%B8%88%E3%81%BF%E3%81%AE%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%A8%E7%8B%AC%E8%87%AA%E5%87%BA%E5%8A%9B">保存済みのエラーと独自出力</a><a class="nav-depth-0" href="#4.-%E5%85%B1%E6%9C%89%E3%81%AE%E5%89%8D%E3%81%AB">4. 共有の前に</a></nav><div class="nav-note">Notebookの保存済み内容<br>変換時の再実行なし</div></aside><main>
+<div class="toolbar"><span class="run-badge">コード 5 · 出力あり 4 · 図 1 · 未実行 1 · エラー出力 1</span><button id="toggle-code" type="button">コードを折りたたむ</button></div>
+<h1 class="document-title">実験ノートを、読みやすいレポートに。</h1>
+<div class="intro-meta">showcase.ipynb · python · 保存済みの内容を表示</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=18004f9a"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<span id="実験ノートを、読みやすいレポートに。"></span><p><strong>Notebook Vignette</strong> は、保存された分析結果をひとつのHTMLにまとめます。目次から目的の節へ移動し、必要なときだけコードを開いて確認できます。</p>
+<blockquote>
+<p>このページの数値は、表示の検証用に用意した架空のデータです。</p>
+</blockquote>
+<h2 data-toc-heading="" id="1.-条件と方法">1. 条件と方法</h2><p>温度条件ごとの反応率を比較し、保存された表と図を表示します。変換時にNotebookのコードは実行しません。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">項目</th>
+<th style="text-align:left;">条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">試料</td>
+<td style="text-align:left;">Sample A / B / C</td>
+</tr>
+<tr>
+<td style="text-align:left;">測定時間</td>
+<td style="text-align:left;">60分</td>
+</tr>
+<tr>
+<td style="text-align:left;">反復数</td>
+<td style="text-align:left;">各条件 3回</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered code-cell" id="cell-id=ee0c1798">
+<details class="code-details" open=""><summary><span>python · セル 01 · In [1]</span><span class="fold-hint">開く / 閉じる</span></summary><button class="copy-button" type="button">コピー</button><div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"試料"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">],</span>
+    <span class="s2">"温度 [°C]"</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span>
+    <span class="s2">"反応率 [%]"</span><span class="p">:</span> <span class="p">[</span><span class="mf">62.4</span><span class="p">,</span> <span class="mf">78.1</span><span class="p">,</span> <span class="mf">88.0</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div></details>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result"><table class="dataframe"><thead><tr><th></th><th>試料</th><th>温度 [°C]</th><th>反応率 [%]</th></tr></thead><tbody><tr><th>0</th><td>A</td><td>25</td><td>62.4</td></tr><tr><th>1</th><td>B</td><td>40</td><td>78.1</td></tr><tr><th>2</th><td>C</td><td>60</td><td>88.0</td></tr></tbody></table></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=66b95114"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 data-toc-heading="" id="2.-結果の可視化">2. 結果の可視化</h2><h3 data-toc-heading="" id="時間と反応率">時間と反応率</h3><p>SVGの保存出力を画像として埋め込んでいます。HTMLと別に画像ファイルを配る必要はありません。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered code-cell" id="cell-id=a2a7d9c8">
+<details class="code-details" open=""><summary><span>python · セル 02 · In [2]</span><span class="fold-hint">開く / 閉じる</span></summary><button class="copy-button" type="button">コピー</button><div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python3"><pre><span></span><span class="c1"># Notebookに保存された図を表示</span>
+<span class="n">display</span><span class="p">(</span><span class="n">reaction_plot</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div></details>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_svg output_subarea">
+<img alt="No description has been provided for this image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgMjIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuaetuepuuOBruWPjeW/nOeOh+OBruaOqOenuyI+CjxyZWN0IHdpZHRoPSI3MDAiIGhlaWdodD0iMjIwIiByeD0iOCIgZmlsbD0iI2Y1ZjhmYSIvPgo8ZyBzdHJva2U9IiNkZmU2ZWIiPjxwYXRoIGQ9Ik01NSAzNUg2NzAgTTU1IDgwSDY3MCBNNTUgMTI1SDY3MCBNNTUgMTcwSDY3MCIvPjwvZz4KPGcgZmlsbD0iIzU4Njg3OSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPjx0ZXh0IHg9IjIyIiB5PSIxNzQiPjAuMDwvdGV4dD48dGV4dCB4PSIyMiIgeT0iMTI5Ij4wLjM8L3RleHQ+PHRleHQgeD0iMjIiIHk9Ijg0Ij4wLjY8L3RleHQ+PHRleHQgeD0iMjIiIHk9IjM5Ij4wLjk8L3RleHQ+PHRleHQgeD0iNTAiIHk9IjE5OCI+MDwvdGV4dD48dGV4dCB4PSIyNDgiIHk9IjE5OCI+MjA8L3RleHQ+PHRleHQgeD0iNDUwIiB5PSIxOTgiPjQwPC90ZXh0Pjx0ZXh0IHg9IjY1MCIgeT0iMTk4Ij42MCBtaW48L3RleHQ+PC9nPgo8cGF0aCBkPSJNNTUgMTcwTDE1NyAxMzZMMjU5IDk5TDM2MSA2OEw0NjMgNTJMNTY1IDQyTDY2NyAzOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDg3ZjhjIiBzdHJva2Utd2lkdGg9IjMiLz4KPGcgZmlsbD0iIzA4N2Y4YyI+PGNpcmNsZSBjeD0iNTUiIGN5PSIxNzAiIHI9IjQiLz48Y2lyY2xlIGN4PSIxNTciIGN5PSIxMzYiIHI9IjQiLz48Y2lyY2xlIGN4PSIyNTkiIGN5PSI5OSIgcj0iNCIvPjxjaXJjbGUgY3g9IjM2MSIgY3k9IjY4IiByPSI0Ii8+PGNpcmNsZSBjeD0iNDYzIiBjeT0iNTIiIHI9IjQiLz48Y2lyY2xlIGN4PSI1NjUiIGN5PSI0MiIgcj0iNCIvPjxjaXJjbGUgY3g9IjY2NyIgY3k9IjM4IiByPSI0Ii8+PC9nPjwvc3ZnPg=="/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=2c18e3b1"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 data-toc-heading="" id="3.-表示の検証">3. 表示の検証</h2><h3 data-toc-heading="" id="数式">数式</h3><p>数式の例: $y(t)=1-\exp(-kt)$。この同梱プレビューは<code>--mathjax none</code>で生成しているため、TeXをそのまま表示しています。</p>
+<h3 data-toc-heading="" id="未実行セル">未実行セル</h3><p>未実行のコードも、状態を明示して表示します。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered code-cell" id="cell-id=6ede3c2b">
+<details class="code-details" open=""><summary><span>python · セル 03 · 未実行</span><span class="fold-hint">開く / 閉じる</span></summary><button class="copy-button" type="button">コピー</button><div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>  <span class="c1"># まだ実行していないセル</span>
+</pre></div>
+</div>
+</div>
+</div></details>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=3d2926e0"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 data-toc-heading="" id="保存済みのエラーと独自出力">保存済みのエラーと独自出力</h3><p>エラー出力や、静的表示できない形式も黙って消さずに残します。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered code-cell" id="cell-id=aa6081de">
+<details class="code-details" open=""><summary><span>python · セル 04 · In [3]</span><span class="fold-hint">開く / 閉じる</span></summary><button class="copy-button" type="button">コピー</button><div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python3"><pre><span></span><span class="n">validate</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div></details>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>ValueError: sample is missing（表示検証用）</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered code-cell" id="cell-id=52f3c9d3">
+<details class="code-details" open=""><summary><span>python · セル 05 · In [4]</span><span class="fold-hint">開く / 閉じる</span></summary><button class="copy-button" type="button">コピー</button><div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-python3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">custom_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div></details>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea"><details class="output-note"><summary>静的表示用データがない出力: application/vnd.example+json</summary><pre>{
+  "application/vnd.example+json": {
+    "status": "demo",
+    "values": [
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered" id="cell-id=21fe755e"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 data-toc-heading="" id="4.-共有の前に">4. 共有の前に</h2><ul>
+<li>元のNotebookは変更されません。</li>
+<li>コードを隠しても、保存された出力中の値は残ります。</li>
+<li>外部データや対話機能が必要な出力は、HTMLだけで再現できない場合があります。</li>
+</ul>
+</div>
+</div>
+</div>
+
+<footer><div class="footer-top"><span>NOTEBOOK VIGNETTE</span><a href="#">ページ先頭へ</a></div>
+<ul class="format-notes"><li>独自形式の出力 1件をデータ表示に置き換えました。</li><li>数式レンダリングは無効です。TeXをそのまま表示しています。</li></ul></footer></main></div><script>(() => {
+ const details=[...document.querySelectorAll('.code-cell details.code-details')];
+ const toggle=document.getElementById('toggle-code');
+ const sync=()=>{if(toggle)toggle.textContent=details.every(x=>x.open)?'コードを折りたたむ':'コードをすべて開く'};
+ if(toggle)toggle.addEventListener('click',()=>{const open=!details.every(x=>x.open);details.forEach(x=>x.open=open);sync()});
+ details.forEach(x=>x.addEventListener('toggle',sync));sync();
+ document.querySelectorAll('.copy-button').forEach(button=>button.addEventListener('click',async event=>{
+  event.preventDefault();event.stopPropagation();
+  const pre=button.parentElement.querySelector('pre');if(!pre)return;
+  try{
+   if(!navigator.clipboard)throw new Error('clipboard unavailable');
+   await navigator.clipboard.writeText(pre.textContent);button.textContent='コピー済み';
+  }catch{
+   const area=document.createElement('textarea');area.value=pre.textContent;
+   area.style.cssText='position:fixed;opacity:0';document.body.appendChild(area);area.select();
+   let copied=false;try{copied=document.execCommand('copy')}finally{area.remove()}
+   if(copied){button.textContent='コピー済み'}else{
+    const range=document.createRange();range.selectNodeContents(pre);
+    const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);
+    button.textContent='選択済み';
+   }
+  }
+  setTimeout(()=>button.textContent='コピー',1800);
+ }));
+ if('IntersectionObserver' in window){
+  const observer=new IntersectionObserver(entries=>{
+   for(const entry of entries){if(entry.isIntersecting){
+    document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',decodeURIComponent(a.hash.slice(1))===entry.target.id));
+   }}
+  },{rootMargin:'-10% 0px -70% 0px'});
+  document.querySelectorAll('[data-toc-heading]').forEach(x=>observer.observe(x));
+ }
+ let beforePrint=[];
+ window.addEventListener('beforeprint',()=>{beforePrint=details.map(x=>x.open);details.forEach(x=>x.open=true)});
+ window.addEventListener('afterprint',()=>{details.forEach((x,i)=>x.open=beforePrint[i]??x.open)});
+})();
+</script></body></html>

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "notebook-vignette"
+version = "0.2.0"
+description = "Render saved Jupyter notebooks as themed, readable HTML without executing code."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+  "nbconvert>=7.17.1,<8",
+  "nbformat>=5.10.4,<6",
+  "beautifulsoup4>=4.12,<5",
+  "bleach[css]>=6.2,<7",
+  "pygments>=2.18,<3",
+  "traitlets>=5.14,<6",
+  "jinja2>=3.1.6,<4",
+]
+
+[project.scripts]
+notebook-vignette = "notebook_vignette.cli:main"
+render-vignette = "notebook_vignette.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1", "build>=1.2,<2", "mypy>=1.15,<2", "types-bleach>=6.2,<7"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/notebook_vignette"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/examples", "/docs", "/.github", "/README.md", "/LICENSE", "/pyproject.toml", "/uv.lock", "/CHANGELOG.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = ["examples/*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src/notebook_vignette", "tests/typecheck"]
+strict = true
+ignore_missing_imports = true
