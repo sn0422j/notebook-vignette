@@ -106,7 +106,7 @@ def test_typed_and_legacy_api_generate_identical_html(notebook, tmp_path):
         date="",
         theme={"name": "dark", "colors": {"accent": "#aabbcc"}},
     )
-    assert typed.read_text() == legacy.read_text()
+    assert typed.read_text(encoding="utf-8") == legacy.read_text(encoding="utf-8")
 
 
 def test_renderer_reuse_does_not_leak_notes_or_notebook_theme(notebook, tmp_path):
@@ -130,5 +130,5 @@ def test_explicit_keyword_overrides_typed_config(notebook, tmp_path):
     config = AppConfig(render=RenderConfig(hide_code=True))
     output = tmp_path / "report.html"
     render_notebook(source, output, config=config, hide_code=False)
-    assert "VISIBLE_INPUT" in output.read_text()
+    assert "VISIBLE_INPUT" in output.read_text(encoding="utf-8")
     assert config.render.hide_code is True
