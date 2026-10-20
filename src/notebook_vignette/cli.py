@@ -6,6 +6,7 @@ import argparse
 import glob
 import json
 import sys
+from io import TextIOWrapper
 from pathlib import Path
 
 from . import __version__
@@ -163,8 +164,20 @@ def settings_from_args(args: argparse.Namespace) -> AppConfig:
     return settings.apply(parse_overrides(args.set))
 
 
+def _configure_output_streams() -> None:
+    """出力先の文字コードを保ち、表現できない文字はエスケープして表示する。
+
+    Windowsのリダイレクト先など、UTF-8以外のストリームでも診断表示で
+    変換を失敗させない。JSONは別途ensure_ascii=Trueで構文を保つ。
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if isinstance(stream, TextIOWrapper):
+            stream.reconfigure(errors="backslashreplace")
+
+
 def main(argv: list[str] | None = None) -> int:
     """バッチ変換を実行し、成功0・変換失敗1・設定/入力エラー2を返す。"""
+    _configure_output_streams()
     command = parser()
     args = command.parse_args(argv)
     if args.list_themes:
@@ -173,7 +186,7 @@ def main(argv: list[str] | None = None) -> int:
         print(
             json.dumps(
                 {"themes": PRESETS, "default_colors": DEFAULT_COLORS.values()},
-                ensure_ascii=False,
+                ensure_ascii=True,
                 indent=2,
             )
         )
@@ -211,5 +224,5 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(f"変換できませんでした: {source}: {exc}", file=sys.stderr)
     if args.json:
-        print(json.dumps(results, ensure_ascii=False, indent=2))
+        print(json.dumps(results, ensure_ascii=True, indent=2))
     return 1 if failed else 0

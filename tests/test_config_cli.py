@@ -67,7 +67,7 @@ def test_cli_settings_precedence(notebook, tmp_path, capsys):
     )
     result = json.loads(capsys.readouterr().out)
     assert result[0]["theme"] == "dark"
-    assert "--accent:#333333" in path.with_suffix(".html").read_text()
+    assert "--accent:#333333" in path.with_suffix(".html").read_text(encoding="utf-8")
 
 
 def test_config_relative_assets(tmp_path):
